@@ -2,16 +2,12 @@ package com.example.pickitup;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.content.ContentValues;
 import android.content.Context;
-import android.widget.Toast;
-
-import static android.widget.Toast.*;
 
 public class SQLite extends SQLiteOpenHelper implements AutoCloseable {
 
     private static final String DB_NAME = "PIU";
-    private static final int VERSION = 1;
+    private static final int VERSION = 2;
 
 
     private static final String qrycreatest="create table stocks (\n" +
@@ -30,8 +26,9 @@ public class SQLite extends SQLiteOpenHelper implements AutoCloseable {
             "    id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
             "    server varchar(50),\n" +
             "    user varchar(30),\n" +
-            "    pass varchar(30));\n" +
-            "insert into opcoes (server,user,pass) values ('','','');";
+            "    bdname varchar(30),\n" +
+            "    pass varchar(30));\n";
+
 
     private static final String qryimport="select \n" +
             "st.ref, st.design, st.familia, st.stock, \n" +
@@ -52,6 +49,8 @@ public class SQLite extends SQLiteOpenHelper implements AutoCloseable {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(qrycreatest);
+        db.execSQL(qrycreatesettings);
+        insop();
     }
 
 
@@ -67,6 +66,18 @@ public class SQLite extends SQLiteOpenHelper implements AutoCloseable {
         super.onOpen(db);
     }
 
+
+    private void insop(){
+        SQLiteDatabase bd = getWritableDatabase();
+        String qrycriasettings = "insert into opcoes (server,user,pass,bdname) values ('','','','');";
+        bd.execSQL(qrycriasettings);
+    }
+
+    public void funcopup(String serv, String user, String pass, String bdname){
+        SQLiteDatabase bd = getWritableDatabase();
+        String updatestring = "update opcoes set server='"+serv+"',user='"+user+"', pass='"+pass+"',bdname='"+bdname+"' where id=1";
+        bd.execSQL(updatestring);
+    }
 
     public void funcupdate(){
 

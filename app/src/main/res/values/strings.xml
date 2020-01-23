@@ -10,4 +10,5 @@
     <string name="servidor">Servidor</string>
     <string name="utilizador">Utilizador</string>
     <string name="password">Password</string>
+    <string name="bd">Base de Dados</string>
 </resources>
