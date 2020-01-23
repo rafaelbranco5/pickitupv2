@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000"
+    tools:context=".Opcoes">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/border">
+
+        <ImageButton
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:id="@+id/btnopback"
+            android:contentDescription="@string/app_name"
+            android:layout_marginStart="10dp"
+            android:background="@mipmap/back"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:text="@string/op_es"
+            android:gravity="center"
+            android:textSize="45sp"
+            android:textColor="#fff"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:gravity="bottom">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:textSize="30sp"
+                android:gravity="center_horizontal"
+                android:text="@string/servidor"
+                android:textColor="#fff"/>
+
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:textColor="#fff"
+                android:backgroundTint="#fff"
+                android:inputType="text"
+                android:id="@+id/etopserv"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:textSize="30sp"
+                android:gravity="center_horizontal"
+                android:text="@string/utilizador"
+                android:textColor="#fff"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:textColor="#fff"
+                android:backgroundTint="#fff"
+                android:inputType="text"
+                android:id="@+id/etopuser"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:textSize="30sp"
+                android:gravity="center_horizontal"
+                android:text="@string/password"
+                android:textColor="#fff"/>
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:textColor="#fff"
+                android:backgroundTint="#fff"
+                android:inputType="textPassword"
+                android:id="@+id/etoppass"/>
+
+        </LinearLayout>
+        <Button
+            android:layout_width="fill_parent"
+            android:background="@drawable/border"
+            android:text="@string/gravar"
+            android:id="@+id/opsave"
+            android:layout_marginBottom="10dp"
+            android:textSize="30sp"
+            android:textColor="#fff"
+            android:layout_height="60dp"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>
