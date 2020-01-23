@@ -3,6 +3,9 @@ package com.example.pickitup;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Console;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -43,6 +47,7 @@ public class SQLServer extends AppCompatActivity {
             }
         });
         AlertDialog ask = conf.create();
+        ask.show();
     }
 
 
@@ -59,30 +64,29 @@ public class SQLServer extends AppCompatActivity {
             sqLite = new SQLite(this);
             bd = sqLite.getWritableDatabase();
             Cursor condata = bd.query("opcoes",new String[]{"server","user","pass","bdname"},"id=(select max(id) from opcoes)",null,null,null,null);
-
+            condata.moveToFirst();
             Class.forName("net.sourceforge.jtds.jdbc.Driver").newInstance();
             String server = condata.getString(0);
             String username = condata.getString(1);
             String password = condata.getString(2);
-            Connection DbConn = DriverManager.getConnection("jdbc:jtds:sqlserver://"+server+"/DATABASE;user=" + username + ";password=" + password);
+            String bdname = condata.getString(3);
+            Connection DbConn = DriverManager.getConnection("jdbc:jtds:sqlserver://"+server+"/"+bdname+";user=" + username + ";password=" + password);
 
             Statement stmt = DbConn.createStatement();
             ResultSet qryresult = stmt.executeQuery(qryimport);
-            qryresult.last();
-            Integer nrows = qryresult.getRow();
-            nrows++;
-            qryresult.first();
+            ResultSet qrynrows = stmt.executeQuery("select count(ststamp) from st where st.stns=0 and st.inactivo=0");
             bd.execSQL("delete from STOCKS where 1=1");
             ProgressBar pb = findViewById(R.id.sqlpb);
             TextView tv = findViewById(R.id.sqltxt);
-            pb.setMax(nrows);
-
-            for (int i=0; i<nrows; i++){
+            Integer x=qrynrows.getInt(0);
+            pb.setMax(x);
+            Integer i=0;
+            do{
                 Integer temp= i+1;
                 pb.setProgress(temp);
-                String texto = R.string.sql + temp.toString() + R.string.de + nrows.toString();
+                String texto = R.string.sql + temp.toString() + R.string.de + x.toString();
                 tv.setText(texto);
-                String ins = "\"INSERT into stocks (ref,design,familia,stock,epv1,epv2,epv3,epv4,epv5,iva1incl,iva2incl,iva3incl,iva4incl,iva5incl,taxa,local,unidade,uni2,imagem,url,peso,massaliq,volume) values (\n" +
+                String ins = "INSERT into stocks (ref,design,familia,stock,epv1,epv2,epv3,epv4,epv5,iva1incl,iva2incl,iva3incl,iva4incl,iva5incl,taxa,local,unidade,uni2,imagem,url,peso,massaliq,volume) values (\n" +
                         "'"+ qryresult.getString(0) +"','"+qryresult.getString(1)+"',\n" +
                         "'"+qryresult.getString(2)+"',"+qryresult.getDouble(3)+",\n" +
                         qryresult.getDouble(4)+","+qryresult.getDouble(5)+",\n" +
@@ -96,10 +100,13 @@ public class SQLServer extends AppCompatActivity {
                         qryresult.getDouble(20)+","+qryresult.getDouble(21)+",0.00)";
                 bd.execSQL(ins);
                 qryresult.next();
-            }
+            }while(qryresult.next());
 
         }catch (Exception ex){
             Toast.makeText(this,"Error:"+ex.toString(),Toast.LENGTH_LONG).show();
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("text lable", ex.toString());
+            clipboard.setPrimaryClip(clip);
         }finally {
             finish();
         }

@@ -2,6 +2,7 @@ package com.example.pickitup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 public class Opcoes extends AppCompatActivity {
 
     private SQLite sqLite;
+    private SQLiteDatabase bd;
     private ImageButton btnback;
     private Button btnsave;
 
@@ -38,6 +40,24 @@ public class Opcoes extends AppCompatActivity {
             }
         });
 
+        loadsettings();
+
+    }
+
+    private void loadsettings(){
+        sqLite = new SQLite(this);
+        bd = sqLite.getWritableDatabase();
+        Cursor condata = bd.query("opcoes",new String[]{"server","user","pass","bdname"},"id=(select max(id) from opcoes)",null,null,null,null);
+        condata.moveToFirst();
+        EditText user,pass,server,bdname;
+        user = findViewById(R.id.etopuser);
+        user.setText(condata.getString(1));
+        pass = findViewById(R.id.etoppass);
+        pass.setText(condata.getString(2));
+        server = findViewById(R.id.etopserv);
+        server.setText(condata.getString(0));
+        bdname = findViewById(R.id.etopbd);
+        bdname.setText(condata.getString(3));
     }
 
     private void guardasettings(){
@@ -54,7 +74,7 @@ public class Opcoes extends AppCompatActivity {
         sbd = etbd.getText().toString().trim();
         //conecta BD
         sqLite = new SQLite(this);
-        SQLiteDatabase bd = sqLite.getWritableDatabase();
+        bd = sqLite.getWritableDatabase();
         String updatestring = "update opcoes set server='"+sserv+"',user='"+suser+"', pass='"+spass+"',bdname='"+sbd+"' where id=1";
         try {
             bd.execSQL(updatestring);
