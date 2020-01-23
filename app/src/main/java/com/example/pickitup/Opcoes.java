@@ -2,6 +2,7 @@ package com.example.pickitup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -51,11 +52,18 @@ public class Opcoes extends AppCompatActivity {
         sserv = etserv.getText().toString().trim();
         etbd = findViewById(R.id.etopbd);
         sbd = etbd.getText().toString().trim();
-
+        //conecta BD
+        sqLite = new SQLite(this);
+        SQLiteDatabase bd = sqLite.getWritableDatabase();
+        String updatestring = "update opcoes set server='"+sserv+"',user='"+suser+"', pass='"+spass+"',bdname='"+sbd+"' where id=1";
         try {
-            sqLite.funcopup(sserv, suser, spass, sbd);
-        }catch(Exception ex) {
-            Toast.makeText(this,"Error:"+ex.toString(),Toast.LENGTH_LONG).show();
+            bd.execSQL(updatestring);
+        }catch (Exception ex)
+        {
+            Toast.makeText(this, "Error: "+ex.toString(), Toast.LENGTH_LONG);
+        }finally {
+            Toast.makeText(this, R.string.sucess, Toast.LENGTH_LONG).show();
+            finish();
         }
 
     }

@@ -4,10 +4,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.content.Context;
 
-public class SQLite extends SQLiteOpenHelper implements AutoCloseable {
+public class SQLite extends SQLiteOpenHelper{
 
     private static final String DB_NAME = "PIU";
-    private static final int VERSION = 2;
+    private static final int VERSION = 3;
 
 
     private static final String qrycreatest="create table stocks (\n" +
@@ -50,7 +50,7 @@ public class SQLite extends SQLiteOpenHelper implements AutoCloseable {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(qrycreatest);
         db.execSQL(qrycreatesettings);
-        insop();
+        insop(db);
     }
 
 
@@ -67,16 +67,9 @@ public class SQLite extends SQLiteOpenHelper implements AutoCloseable {
     }
 
 
-    private void insop(){
-        SQLiteDatabase bd = getWritableDatabase();
+    private void insop(SQLiteDatabase bd){
         String qrycriasettings = "insert into opcoes (server,user,pass,bdname) values ('','','','');";
         bd.execSQL(qrycriasettings);
-    }
-
-    public void funcopup(String serv, String user, String pass, String bdname){
-        SQLiteDatabase bd = getWritableDatabase();
-        String updatestring = "update opcoes set server='"+serv+"',user='"+user+"', pass='"+pass+"',bdname='"+bdname+"' where id=1";
-        bd.execSQL(updatestring);
     }
 
     public void funcupdate(){

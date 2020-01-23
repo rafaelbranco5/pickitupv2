@@ -11,4 +11,5 @@
     <string name="utilizador">Utilizador</string>
     <string name="password">Password</string>
     <string name="bd">Base de Dados</string>
+    <string name="sucess">Gravado com Sucesso!</string>
 </resources>
