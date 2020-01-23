@@ -12,4 +12,9 @@
     <string name="password">Password</string>
     <string name="bd">Base de Dados</string>
     <string name="sucess">Gravado com Sucesso!</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+    <string name="delbd">Vai reconstruir a tabela de Artigos, tem a certeza?</string>
+    <string name="sql">A atualizar registo </string>
+    <string name="de"> de </string>
 </resources>
