@@ -79,15 +79,6 @@
                         android:textSize="24sp" />
 
                     <TextView
-                        android:id="@+id/txt_quantidade2"
-                        android:layout_width="match_parent"
-                        android:layout_height="59dp"
-                        android:text="Quantidade Actual"
-                        android:textAlignment="center"
-                        android:textColor="#39A1FF"
-                        android:textSize="24sp" />
-
-                    <TextView
                         android:id="@+id/txt_quantidade"
                         android:layout_width="match_parent"
                         android:layout_height="74dp"
@@ -107,17 +98,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:editable="false"
-                        android:ems="10"
-                        android:inputType="textPersonName"
-                        android:textAlignment="center"
-                        android:textColor="#39A1FF"
-                        android:textSize="24sp" />
-
-                    <EditText
-                        android:id="@+id/etxt_quantidade"
-                        android:layout_width="match_parent"
-                        android:layout_height="63dp"
-                        android:editable="true"
                         android:ems="10"
                         android:inputType="textPersonName"
                         android:textAlignment="center"

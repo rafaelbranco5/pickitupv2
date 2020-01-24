@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -15,7 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
@@ -35,7 +36,6 @@ public class Consulta extends AppCompatActivity {
     Button actualiza;
     private SQLite sqLite;
     private SQLiteDatabase bd;
-    int aux;
 
 
 
@@ -44,11 +44,11 @@ public class Consulta extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consulta);
 
+
         sqLite = new SQLite(this);
         bd = sqLite.getWritableDatabase();
         scanner = findViewById(R.id.surfaceView);
         ref = findViewById(R.id.etxt_ref);
-        quantidade = findViewById(R.id.etxt_quantidade);
         actualiza = findViewById(R.id.btn_update);
         nova_q = findViewById(R.id.etxt_nova_q);
         detetarCodigo();
@@ -57,17 +57,23 @@ public class Consulta extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    bd.execSQL("UPDATE quantidade FROM stocks WHERE ref=" + ref);
-                    bd.close();
+                    bd.execSQL("UPDATE stocks SET stock="+ nova_q.getText() +" WHERE ref LIKE '%" + ref.toString() +"%';");
                     Toast.makeText(getApplicationContext(), "Valor actualizado com sucesso.", Toast.LENGTH_SHORT).show();
                 }catch (Exception e){
-                    Toast.makeText(getApplicationContext(), "Ocurreu um erro.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Ocurreu um erro." + e, Toast.LENGTH_SHORT).show();
                 }finally {
                     volta_menu();
                 }
 
             }
         });
+    }
+    private void load(String s){
+        sqLite = new SQLite(this);
+        bd = sqLite.getWritableDatabase();
+        Cursor cursor=bd.rawQuery("select stock from stocks where ref like '%?%'", new String[]{"s"});
+        Double d = cursor.getDouble(0);
+        quantidade.setText(d+"");
     }
 
     private void volta_menu(){
@@ -123,6 +129,9 @@ public class Consulta extends AppCompatActivity {
                             } else {
                                 barcodeData = barcodes.valueAt(0).displayValue;
                                 ref.setText(barcodeData);
+                               // load(ref.toString());
+
+
                             /*    Cursor con = bd.rawQuery("SELECT stock FROM stocks WHERE ref like '%?%'", new String[]{ref.toString()});
                                 con.moveToFirst();
                                 String teste = con.getString(1);

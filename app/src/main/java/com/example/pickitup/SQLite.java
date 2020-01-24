@@ -29,7 +29,7 @@ public class SQLite extends SQLiteOpenHelper{
             "    bdname varchar(30),\n" +
             "    pass varchar(30), instancia varchar(50));\n";
 
-    private static String querryDados1 = "INSERT INTO stocks (ref, design, stock, local ) VALUES ('1', 'Design1', '20', 'Corredor 10');";
+    private static String querryDados1 = "INSERT INTO stocks (ref, design, stock, local ) VALUES ('10000', 'Design1', '20', 'Corredor 10');";
     private static String querryDados2 = "INSERT INTO stocks (ref, design, stock, local ) VALUES ('2', 'Design33', '55', 'Corredor 50');";
     private static String querryDados3 = "INSERT INTO stocks (ref, design, stock, local ) VALUES ('3', 'Design15', '10', 'Corredor 20');";
 
