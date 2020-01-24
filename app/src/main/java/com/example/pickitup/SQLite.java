@@ -7,7 +7,7 @@ import android.content.Context;
 public class SQLite extends SQLiteOpenHelper{
 
     private static final String DB_NAME = "PIU";
-    private static final int VERSION = 3;
+    private static final int VERSION = 4;
 
 
     private static final String qrycreatest="create table stocks (\n" +
@@ -27,7 +27,7 @@ public class SQLite extends SQLiteOpenHelper{
             "    server varchar(50),\n" +
             "    user varchar(30),\n" +
             "    bdname varchar(30),\n" +
-            "    pass varchar(30));\n";
+            "    pass varchar(30), instancia varchar(50));\n";
 
 
 
@@ -62,7 +62,7 @@ public class SQLite extends SQLiteOpenHelper{
 
 
     private void insop(SQLiteDatabase bd){
-        String qrycriasettings = "insert into opcoes (server,user,pass,bdname) values ('','','','');";
+        String qrycriasettings = "insert into opcoes (server,user,pass,bdname,instancia) values ('','','','','');";
         bd.execSQL(qrycriasettings);
     }
 
