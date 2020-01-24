@@ -46,68 +46,70 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
-                android:textSize="30sp"
                 android:gravity="center_horizontal"
                 android:text="@string/servidor"
-                android:textColor="#fff"/>
+                android:textColor="#fff"
+                android:textSize="30sp" />
 
 
             <EditText
+                android:id="@+id/etopserv"
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
-                android:textColor="#fff"
                 android:backgroundTint="#fff"
                 android:inputType="text"
-                android:id="@+id/etopserv"/>
+                android:textColor="#fff" />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
-                android:textSize="30sp"
                 android:gravity="center_horizontal"
                 android:text="@string/utilizador"
-                android:textColor="#fff"/>
+                android:textColor="#fff"
+                android:textSize="30sp" />
 
             <EditText
+                android:id="@+id/etopuser"
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
-                android:textColor="#fff"
                 android:backgroundTint="#fff"
                 android:inputType="text"
-                android:id="@+id/etopuser"/>
+                android:textColor="#fff" />
 
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
-                android:textSize="30sp"
                 android:gravity="center_horizontal"
                 android:text="@string/password"
-                android:textColor="#fff"/>
+                android:textColor="#fff"
+                android:textSize="30sp" />
 
             <EditText
+                android:id="@+id/etoppass"
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
-                android:textColor="#fff"
                 android:backgroundTint="#fff"
                 android:inputType="textPassword"
-                android:id="@+id/etoppass"/>
+                android:textColor="#fff" />
+
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
-                android:textSize="30sp"
                 android:gravity="center_horizontal"
                 android:text="@string/bd"
-                android:textColor="#fff"/>
+                android:textColor="#fff"
+                android:textSize="30sp" />
 
             <EditText
+                android:id="@+id/etopbd"
                 android:layout_width="fill_parent"
                 android:layout_height="40dp"
-                android:textColor="#fff"
                 android:backgroundTint="#fff"
                 android:inputType="text"
-                android:id="@+id/etopbd"/>
+                android:textColor="#fff" />
 
         </LinearLayout>
+
         <Button
             android:layout_width="fill_parent"
             android:background="@drawable/border"

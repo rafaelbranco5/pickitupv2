@@ -10,7 +10,7 @@ import android.widget.ImageButton;
 
 public class Menu extends AppCompatActivity {
     ImageButton btnop;
-    Button btimp;
+    Button btimp, consulta_artigos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +19,7 @@ public class Menu extends AppCompatActivity {
 
         btnop= findViewById(R.id.btnsettings);
         btimp = findViewById(R.id.stimport);
+        consulta_artigos = findViewById(R.id.stview);
 
         btnop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,6 +35,13 @@ public class Menu extends AppCompatActivity {
             }
         });
 
+        consulta_artigos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                abreConsulta();
+            }
+        });
+
     }
 
     private void abreimp(){
@@ -43,6 +51,11 @@ public class Menu extends AppCompatActivity {
 
     private void abreop(){
         Intent i = new Intent(this, Opcoes.class);
+        startActivity(i);
+    }
+
+    private void abreConsulta(){
+        Intent i = new Intent(this, Consulta.class);
         startActivity(i);
     }
 }
