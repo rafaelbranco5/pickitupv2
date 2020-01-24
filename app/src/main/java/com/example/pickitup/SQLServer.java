@@ -35,6 +35,7 @@ public class SQLServer extends AppCompatActivity {
         bd = sqLite.getWritableDatabase();
         Cursor condata = bd.query("opcoes",new String[]{"server","user","pass","bdname"},"id=(select max(id) from opcoes)",null,null,null,null);
         condata.moveToFirst();
+
         server = condata.getString(0);
         username = condata.getString(1);
         password = condata.getString(2);
@@ -100,7 +101,7 @@ public class SQLServer extends AppCompatActivity {
 
                 Class.forName("net.sourceforge.jtds.jdbc.Driver").newInstance();
 
-                Connection DbConn = DriverManager.getConnection("jdbc:jtds:sqlserver://"+server+";DatabaseName="+bdname+";user=" + username + ";password=" + password);
+                Connection DbConn = DriverManager.getConnection("jdbc:jtds:sqlserver://"+server+"/"+bdname+";user=" + username + ";password=" + password);
 
                 Statement stmt = DbConn.createStatement();
                 ResultSet qryresult = stmt.executeQuery(qryimport);
