@@ -13,10 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Export"></activity>
+
         <meta-data
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="barcode" />
-        <activity android:name=".Consulta"></activity>
+
+        <activity android:name=".Consulta" />
         <activity android:name=".SQLServer" />
         <activity android:name=".Opcoes" />
         <activity android:name=".Menu" />

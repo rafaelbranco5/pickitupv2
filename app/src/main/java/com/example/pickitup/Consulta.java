@@ -59,19 +59,19 @@ public class Consulta extends AppCompatActivity {
                 try {
                     bd.execSQL("UPDATE quantidade FROM stocks WHERE ref=" + ref);
                     bd.close();
+                    Toast.makeText(getApplicationContext(), "Valor actualizado com sucesso.", Toast.LENGTH_SHORT).show();
                 }catch (Exception e){
                     Toast.makeText(getApplicationContext(), "Ocurreu um erro.", Toast.LENGTH_SHORT).show();
                 }finally {
-                    Toast.makeText(getApplicationContext(), "Valor actualizado com sucesso.", Toast.LENGTH_SHORT).show();
-                    volta_opcoes();
+                    volta_menu();
                 }
 
             }
         });
     }
 
-    private void volta_opcoes(){
-        Intent i = new Intent(this, Opcoes.class);
+    private void volta_menu(){
+        Intent i = new Intent(this, Menu.class);
         startActivity(i);
     }
 
@@ -123,10 +123,14 @@ public class Consulta extends AppCompatActivity {
                             } else {
                                 barcodeData = barcodes.valueAt(0).displayValue;
                                 ref.setText(barcodeData);
+                            /*    Cursor con = bd.rawQuery("SELECT stock FROM stocks WHERE ref like '%?%'", new String[]{ref.toString()});
+                                con.moveToFirst();
+                                String teste = con.getString(1);
+                                quantidade.setText(teste); */
                             }
                         }
                     });
-                    quantidade.post(new Runnable() {
+ /*                   quantidade.post(new Runnable() {
                         @Override
                         public void run() {
                             if (barcodes.valueAt(0).email != null){
@@ -135,9 +139,14 @@ public class Consulta extends AppCompatActivity {
                                 con.moveToFirst();
                                 barcodeData = con.getString(1);
                                 quantidade.setText(barcodeData);
+                            } else {
+                                Cursor con = bd.query("stocks", new String[]{"ref", "stock"}, "ref="+ref.getText(), null, null, null, null);
+                                con.moveToFirst();
+                                String teste = con.getString(1);
+                                quantidade.setText(teste);
                             }
                         }
-                    });
+                    }); */
                 }
             }
         });

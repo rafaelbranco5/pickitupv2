@@ -117,7 +117,7 @@
                         android:id="@+id/etxt_quantidade"
                         android:layout_width="match_parent"
                         android:layout_height="63dp"
-                        android:editable="false"
+                        android:editable="true"
                         android:ems="10"
                         android:inputType="textPersonName"
                         android:textAlignment="center"
